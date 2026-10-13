@@ -1,12 +1,16 @@
+from decimal import Decimal
+
+
 def calculate_discount(price, is_member):
     # apply member discount
-    if is_member == True:
-        return price * 0.90
+    if is_member:
+        discount_factor = Decimal("0.90") if isinstance(price, Decimal) else 0.90
+        return price * discount_factor
     return price
 
 
-def total(items):
-    sum = 0
-    for i in items:
-        sum = sum + items[i]
-    return sum
+def total(prices):
+    running_total = Decimal("0")
+    for price in prices:
+        running_total += price
+    return running_total
